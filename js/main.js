@@ -11,9 +11,9 @@ const catalogo = [
     {genero:"REGUETON", instrumento:"VOCALS", precio: 100}
 ];
 
-let listaCatalogo = "Bienvenido a LatinSounds! \nTracks disponibles: \n\n";
+let listaCatalogo = "Bienvenido a Latin Sounds! \nTracks disponibles: \n\n";
 catalogo.forEach(item => {
-    listaCatalogo += `Genero: ${item.genero} - Instrumento: ${item.instrumento}\n`  
+    listaCatalogo += `Genero: ${item.genero} - Instrumento: ${item.instrumento} - $${item.precio}\n`  
 });
 
 
@@ -27,9 +27,22 @@ class CarritoTracks {
         this.tracks = []
     }
 
-    agregarTrack(generoTrack, instrumentoTrack) {
-        this.tracks.push({id:this.generarId(), genero:generoTrack.toLocalUpperCase()}, {instrumento:instrumentoTrack.toLocaleUpperCase()}, {precio:15});
+    agregarTrack(generoTrack, instrumentoTrack , precioTrack) {
+        this.tracks.push({id:this.generarId(), genero:generoTrack.toLocaleUpperCase()}, {instrumento:instrumentoTrack.toLocaleUpperCase()}, {precio:precioTrack});
         console.log("Agregaste un Track!")
+        tracks.forEach(item => {
+            if (this.tracks.instrumento == "BASS") {
+                this.tracks.precio = 50
+            } else if (this.tracks.instrumento == "DRUMS"){
+                this.tracks.precio = 80
+
+            } else if (this.tracks.instrumento == "BASS") {
+                this.tracks.precio = 100
+            } else {
+                this.tracks.precio = 100
+            }
+            
+        });
     }
 
     eliminarTrack(id){
@@ -53,49 +66,53 @@ class CarritoTracks {
             
         });
         return max + 1;
-        }
+    }
 
-        listarTracks() {
-            let contenido = "Tracks Agregados: \n\n";
+    listarTracks() {
+        let contenido = "Tracks Agregados: \n\n";
 
-            this.tracks.forEach(item => {
-                contenido += `${item.id} - ${item.genero} - ${item.instrumento} - $${item.precio}`
-                
-            });
-            return contenido;
-        }
+        this.tracks.forEach(item => {
+            contenido += `${item.id} - ${item.genero} - ${item.instrumento} - $${item.precio}`
+            
+        });
+        return contenido;
+    }
 }
 
-let genero = " ";
+let genero = "";
 let instrumento = "";
-let precio = 15;
+let precio = 0;
+
+
 
 const carrito = new CarritoTracks();
 
 //_____AGREGAR TRACKS AL CARRITO_____//
 
 while (genero.toLocaleUpperCase() != "ESC") {
-    let genero = prompt("Ingrese el genero del Track LATIN/TRAP/REGUETON (ESCRIBA ESC PARA SALIR");
+    genero = prompt("Ingrese el genero del Track LATIN/TRAP/REGUETON (ESCRIBA ESC PARA SALIR");
+    while ((genero != "LATIN") || (genero != "TRAP") || (genero != "REGUETON") || (genero != "")) {
+        alert ("Error! Seleccione un genero entre LATIN/TRAP/REGUETON");
+        let genero = prompt("Ingrese el genero del Track LATIN/TRAP/REGUETON (ESCRIBA ESC PARA SALIR")
+    }
+    
 
     if (genero == "ESC") {
         break;
     }
-    while ((genero =! "LATIN")||(genero =! "TRAP") || (genero != "REGUETON") || (genero != " ")) {
+
+    while ((genero =! "LATIN") && (genero =! "TRAP") && (genero != "REGUETON") && (genero != "")) {
         alert ("Error! Seleccione un genero entre LATIN/TRAP/REGUETON");
         let genero = prompt("Ingrese el genero del Track LATIN/TRAP/REGUETON (ESCRIBA ESC PARA SALIR");
-
-        if (genero == "ESC") {
-            break;
-        }
     }
     
     instrumento = prompt("Ingrese el instrumento entre BASS/DRUMS/VOCALS");    
-
+/*
     while ((instrumento =! "BASS") || (instrumento =! "DRUMS") || (instrumento != "VOCALS")) {
         alert ("Error! Seleccione un instrumento entre BASS/DRUMS/VOCALS");
         instrumento = prompt("Ingrese el instrumento entre BASS/DRUMS/VOCALS");    
     }
-
+*/
     carrito.agregarTrack(genero, instrumento, precio);
 }
 
