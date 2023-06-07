@@ -31,12 +31,12 @@ class CarritoTracks {
         this.tracks.push({id:this.generarId(), genero:generoTrack.toLocaleUpperCase()}, {instrumento:instrumentoTrack.toLocaleUpperCase()}, {precio:precioTrack});
         console.log("Agregaste un Track!")
         tracks.forEach(item => {
-            if (this.tracks.instrumento == "BASS") {
-                this.tracks.precio = 50
-            } else if (this.tracks.instrumento == "DRUMS"){
-                this.tracks.precio = 80
+            if (item.instrumento == "BASS") {
+                item.precio = 50
+            } else if (item.instrumento == "DRUMS"){
+                item.tracks.precio = 80
 
-            } else if (this.tracks.instrumento == "BASS") {
+            } else if (item.instrumento == "BASS") {
                 this.tracks.precio = 100
             } else {
                 this.tracks.precio = 100
@@ -87,32 +87,29 @@ let precio = 0;
 
 const carrito = new CarritoTracks();
 
+
 //_____AGREGAR TRACKS AL CARRITO_____//
 
-while (genero.toLocaleUpperCase() != "ESC") {
-    genero = prompt("Ingrese el genero del Track LATIN/TRAP/REGUETON (ESCRIBA ESC PARA SALIR");
-    while ((genero != "LATIN") || (genero != "TRAP") || (genero != "REGUETON") || (genero != "")) {
-        alert ("Error! Seleccione un genero entre LATIN/TRAP/REGUETON");
-        let genero = prompt("Ingrese el genero del Track LATIN/TRAP/REGUETON (ESCRIBA ESC PARA SALIR")
-    }
-    
+genero = prompt("Ingrese el genero del Track LATIN/TRAP/REGUETON (ESCRIBA ESC PARA SALIR)");
 
-    if (genero == "ESC") {
-        break;
+while (genero.toUpperCase() !== "ESC") {
+    while (genero.toUpperCase !== "LATIN" || genero.toUpperCase !== "TRAP" || genero.toUpperCase !== "REGUETON") {
+    alert("Error! Seleccione un genero entre LATIN/TRAP/REGUETON");
+    genero.toUpperCase = prompt("Ingrese el genero del Track LATIN/TRAP/REGUETON (ESCRIBA ESC PARA SALIR)");
     }
 
-    while ((genero =! "LATIN") && (genero =! "TRAP") && (genero != "REGUETON") && (genero != "")) {
-        alert ("Error! Seleccione un genero entre LATIN/TRAP/REGUETON");
-        let genero = prompt("Ingrese el genero del Track LATIN/TRAP/REGUETON (ESCRIBA ESC PARA SALIR");
+    if (genero.toUpperCase() === "ESC") {
+    break;
     }
+
+    // Perform actions with the valid genero here
     
-    instrumento = prompt("Ingrese el instrumento entre BASS/DRUMS/VOCALS");    
-/*
-    while ((instrumento =! "BASS") || (instrumento =! "DRUMS") || (instrumento != "VOCALS")) {
+    instrumento = prompt("Ingrese el instrumento entre BASS/DRUMS/VOCALS)");    
+    while (instrumento !== "BASS" && instrumento !== "DRUMS" && instrumento !== "VOCALS") {
         alert ("Error! Seleccione un instrumento entre BASS/DRUMS/VOCALS");
         instrumento = prompt("Ingrese el instrumento entre BASS/DRUMS/VOCALS");    
     }
-*/
+
     carrito.agregarTrack(genero, instrumento, precio);
 }
 
@@ -140,28 +137,5 @@ if (carrito.totalProductos() > 0) {
     alert ("No se encontraron Tracks agregados en el carrito");
 }
 
-//INFORMAR EL TOTAL DE PRODUCTOS AGREGADOS
-
-
-
-
-/*
-
-
-//genero.toLocaleUpperCase() == "LATIN" || genero.toLocaleUpperCase() == "TRAP" || genero.toLocaleUpperCase() == "REGUETON"
-;
-class Carrito {
-    constructor() {
-        this.productos = []
-    }
-    
-
-
-}
-
-*/
-
-
-//______________ENTRADA DE DATOS_______________//
 
 
